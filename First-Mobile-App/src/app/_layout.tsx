@@ -23,3 +23,5 @@ export default function RootLayout() {
     </Stack>
   );
 }
+
+// Stacks are used to manage navigation between different screens in a hierarchical manner.
