@@ -19,3 +19,5 @@ export default function CategoryLayout() {
     </Stack>
   );
 }
+
+// [slug] allows for dynamic page rendering depending on the slug passed into the route ex. categories/[slug]

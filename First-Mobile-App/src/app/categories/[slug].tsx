@@ -11,4 +11,6 @@ const Category = () => {
 
 export default Category
 
+// [slug] allows for dynamic page rendering depending on the slug passed into the route ex. categories/[slug]
+
 const styles = StyleSheet.create({})

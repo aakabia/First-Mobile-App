@@ -23,3 +23,5 @@ export default function RootLayout() {
     </Stack>
   );
 }
+
+// This RootLayout component defines the navigation structure for your app using Expo Router's Stack navigator.
