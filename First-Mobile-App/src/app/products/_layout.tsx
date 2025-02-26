@@ -6,7 +6,7 @@ export default function ProductLayout() {
   return (
     <Stack>
       <Stack.Screen
-        name="[slug]"
+        name="[slug]" // route will be /product/slug
         options={({navigation})=>({
             headerShown: true,
             headerLeft: () => (
@@ -19,3 +19,5 @@ export default function ProductLayout() {
     </Stack>
   );
 }
+
+// [slug] allows for dynamic page rendering depending on the slug passed into the route ex. categories/[slug]
