@@ -67,6 +67,7 @@ export const ListHeader = () => {
           data={CATEGORIES}
           renderItem={({ item }) => (
             <Link asChild href={`/categories/${item.slug}`}>
+              {/* used slug above to dynamically render different category routes for one page */}
               <Pressable style={styles.category}>
                 <Image
                   source={{ uri: item.imageUrl }}
