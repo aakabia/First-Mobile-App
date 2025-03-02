@@ -129,6 +129,6 @@ export const useCartStore = create<CartState>((set, get) => ({
   },
 }));
 
-// Above, this ts file exports a global state that we create with zustand and call useCartStore
+// Above, this ts file exports a global state that we use to create a dynamic cart state with zustand and call useCartStore
 // the useCartStore has a type of CartState
 // CartState and CartItemType are type alias for defining a expected object its props and types
