@@ -88,7 +88,7 @@ export const useCartStore = create<CartState>((set, get) => ({
             : item
         ),
       };
-      // returning a object becyase set expects that
+      // returning a object because set expects that
       // in the object we acess the state of the items and map ofver them.
       /* our map here says return me a list the same size of this list 
         however, for the entries that match this id and have a 
