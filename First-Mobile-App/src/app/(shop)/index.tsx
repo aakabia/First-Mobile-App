@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { PRODUCTS } from "../../../assets/products";
 import { ProductListItem } from "../../components/Product-list-item";
 import { ListHeader } from "../../components/List-header";
@@ -6,24 +6,18 @@ import Auth from "../auth";
 
 const Home = () => {
   return (
-    <>
-      <Auth />
-
-      {/* 
-      <View>
-      
-       <FlatList
+    <View>
+      <FlatList
         data={PRODUCTS}
-        renderItem={({item}) => <ProductListItem product={item}/>} // each individual item
+        renderItem={({ item }) => <ProductListItem product={item} />} // each individual item
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
         ListHeaderComponent={ListHeader}
         contentContainerStyle={styles.flatListContent}
         columnWrapperStyle={styles.flatListColumn}
-        style={{paddingHorizontal:10, paddingVertical:5}}
-      /> 
-    </View>*/}
-    </>
+        style={{ paddingHorizontal: 10, paddingVertical: 5 }}
+      />
+    </View>
   );
 };
 
