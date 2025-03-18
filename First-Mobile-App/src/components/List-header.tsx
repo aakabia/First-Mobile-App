@@ -13,11 +13,20 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { CATEGORIES } from "../../assets/categories";
 import { useCartStore } from "../store/cart-store";
+import { supabase } from "../lib/supabase";
 
 export const ListHeader = () => {
 
   const {getItemCount} = useCartStore()
 
+
+  const handleSignOut = async () =>{
+
+    await supabase.auth.signOut();
+
+  }
+
+  // handleSignOut currently logs out of our current supabase session 
 
   return (
     <View style={styles.headerContainer}>
@@ -50,13 +59,14 @@ export const ListHeader = () => {
               )}
             </Pressable>
           </Link>
-          <TouchableOpacity style={styles.signOutButton}>
+          <TouchableOpacity onPress={handleSignOut} style={styles.signOutButton}>
             <FontAwesome name="sign-out" size={25} color="red"></FontAwesome>
           </TouchableOpacity>
         </View>
       </View>
       {/* Above is avatar, userName and shop view of the hompage */}
       {/* We use require to retrieve local images and fontAwesome for icons.*/}
+      {/* handleSignOut to log out of our session from supabase.*/}
 
       <View style={styles.heroContainer}>
         <Image

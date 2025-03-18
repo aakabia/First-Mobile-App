@@ -9,6 +9,10 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { supabase } from "../lib/supabase";
+import { Toast } from "react-native-toast-notifications";
+import { useAuth } from "../providers/auth-provider";
+import { Redirect } from "expo-router";
 
 const authSchema = zod.object({
   email: zod.string().email({ message: "Invalid email address" }),
@@ -22,7 +26,14 @@ const authSchema = zod.object({
 
 const Auth = () => {
 
+  const {session} = useAuth();
 
+
+  if(session) return <Redirect href={"/"} />
+
+  // get our session and redirect us if a a session exists 
+
+ 
   
   const { control, handleSubmit, formState } = useForm({
     resolver: zodResolver(authSchema),
@@ -36,15 +47,38 @@ const Auth = () => {
   // Also uses the auth schema to set as our fesolvers for our form.
   // Also sets the default values
 
-  const signIn = (data: zod.infer<typeof authSchema>) => {
-    console.log(data);
+  const signIn = async (data: zod.infer<typeof authSchema>) => {
+    const { error } = await supabase.auth.signInWithPassword(data)
+
+    if(error){
+      alert(error.message)
+    }else{
+      Toast.show("Signed in Successfully", {
+        type: "success",
+        placement: "top",
+        duration: 1500,
+      })
+    }
+    
   };
 
-  const signUp = (data: zod.infer<typeof authSchema>) => {
-    console.log(data);
+    // Our sign in function uses supabase.auth.signInWithPassword to handle our sign in data 
+
+  const signUp = async (data: zod.infer<typeof authSchema>) => {
+    const { error } = await supabase.auth.signUp(data)
+
+    if(error){
+      alert(error.message)
+    }else{
+      Toast.show("Signed Up Successfully", {
+        type: "success",
+        placement: "top",
+        duration: 1500,
+      })
+    }
   };
 
-  // Our sign in and sign up functions that just logs the data for now.
+  // Our and sign up function uses supabase.auth.signUp to handle our sign up data 
 
   return (
     <ImageBackground

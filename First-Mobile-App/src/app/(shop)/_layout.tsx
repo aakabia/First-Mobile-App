@@ -1,29 +1,51 @@
-import { Tabs } from "expo-router";
-import { StyleSheet } from "react-native";
+import { Redirect, Tabs } from "expo-router";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { useAuth } from "../../providers/auth-provider";
+
+
+
+
+
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome6>["name"];
+  // Above is extracting props from frontAwesome to make sure our input matches that of FontAwesome
+  color?: string;
+  focused: boolean;
+}) {
+  return (
+    <FontAwesome6
+      size={24}
+      {...props}
+      style={{ color: props.focused ? "#2196F3" : "gray" }}
+    ></FontAwesome6>
+  );
+}
+
+/* TabBarIcon is a function that takes a object with the props name and color and 
+returns a FontAwesome icon with the props spread into it and a default color.*/
+
+// The default color in style helps override the prop color.
+
+
+
 
 const TabsLayout = () => {
-  function TabBarIcon(props: {
-    name: React.ComponentProps<typeof FontAwesome6>["name"];
-    // Above is extracting props from frontAwesome to make sure our input matches that of FontAwesome
-    color?: string;
-    focused: boolean;
-  }) {
-    return (
-      <FontAwesome6
-        size={24}
-        {...props}
-        style={{ color: props.focused ? "#2196F3" : "gray" }}
-      ></FontAwesome6>
-    );
-  }
 
-  /* TabBarIcon is a function that takes a object with the props name and color and 
-  returns a FontAwesome icon with the props spread into it and a default color.*/
+  const {session, mounting, user} = useAuth();
 
-  // The default color in style helps override the prop color.
+  if(mounting) return <ActivityIndicator/>
 
+  // if we are still mounting and our useeffect in our provider is not done running display a activity indicator
+
+
+  if (!session) return <Redirect href= "/auth"/>
+
+  // direct us to sign in page if not signed in for all our routes
+
+
+  
   return (
     <SafeAreaView edges={["top"]} style={styles.safeArea}>
       <Tabs
